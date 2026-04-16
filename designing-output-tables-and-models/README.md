@@ -45,7 +45,7 @@ We've included a frequently asked questions section here to clarify a few common
     - Run the queryAvailablePipelines program in the 04_defineOutputAndModels directory. This will create a list of the available model pipelines in _reviewModelPipelineList.xlsx.
 
 - Is it possible to define my own model pipeline?
-    - Yes! There are a few guidelines you will need to follow. Refer to this [page](defining-a-custom-analytic-pipeline/README.md) to learn how to define your own model pipeline.
+    - Yes! There are a few guidelines you will need to follow. Refer to this [page](../defining-a-custom-analytic-pipeline/README.md) to learn how to define your own model pipeline.
 
 - Do I need to train a different model for every asset?  Is it possible to create a model for a group of assets?
     - You have total flexibility! When you follow the steps in "Specifying Models to Train and Deploy", you will notice that there is a field called modelGroupLogic. It has three options... "One Model Per AssetID" will train a separate model for each asset, "One Model Applicable to All Assets" will train a single model, and "One Model Per Unique AttributeID Value" will train a separate model for groups of assets. If you choose this last option, then you will need to also specify an attributeID to group on in a separate field (modelGroupByAttributeID).

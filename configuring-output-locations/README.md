@@ -9,7 +9,7 @@ Otherwise, continue on to the next section where you'll set use the native capab
 
 ## Configuring an Output Location 
 
-The below powerpoint will walk you through how to output analytic ready datasets, derived attributes, model predictions, etc. to an output location. SAS Event Stream Processing has more than 20 existing [connectors](https://go.documentation.sas.com/doc/en/espcdc/v_059/espca/titlepage.htm) that can be used to write to various locations. This includes connecting to message feeds (kafka, mqtt, etc), writing to databases, etc. This content will show you how to set up these connections and then how to integrate that information into your AutoML for IoT project. 
+The below powerpoint will walk you through how to output analytic ready datasets, derived attributes, model predictions, etc. to an output location. SAS Event Stream Processing has more than 20 existing [connectors](https://go.documentation.sas.com/doc/en/espcdc/v_070/espca/titlepage.htm) that can be used to write to various locations. This includes connecting to message feeds (kafka, mqtt, etc), writing to databases, etc. This content will show you how to set up these connections and then how to integrate that information into your AutoML for IoT project. 
 
 Since SAS Visual Analytics natively integrates with CAS, the powerpoint includes a section at the end that specifically shows how to output your final tables to CAS. 
 

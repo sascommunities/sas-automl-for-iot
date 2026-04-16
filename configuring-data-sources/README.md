@@ -15,7 +15,7 @@ It is easy to configure connections to both real-time data sources and to histor
 
 ### Configuring a Connection to a Real-Time Data Source
 
-The below powerpoint will walk you through how to create a real-time connection to your data source. SAS Event Stream Processing has more than 20 existing [connectors](https://go.documentation.sas.com/doc/en/espcdc/v_059/espca/titlepage.htm) that can be used to retrieve real-time data. This includes connecting to message feeds (kafka, mqtt, etc), querying databases at a specified time interval, running API calls, etc. The powerpoint will show you how to set up these connections and then how to integrate that information into your SAS AutoML for IoT project. 
+The below powerpoint will walk you through how to create a real-time connection to your data source. SAS Event Stream Processing has more than 20 existing [connectors](https://go.documentation.sas.com/doc/en/espcdc/v_070/espca/titlepage.htm) that can be used to retrieve real-time data. This includes connecting to message feeds (kafka, mqtt, etc), querying databases at a specified time interval, running API calls, etc. The powerpoint will show you how to set up these connections and then how to integrate that information into your SAS AutoML for IoT project. 
 
 Step-by-Step Guide         |  
 :-------------------------:|

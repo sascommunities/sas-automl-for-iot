@@ -8,7 +8,6 @@ The below powerpoint will show you how to instruct SAS AutoML for IoT to initiat
 
 Step-by-Step Guide for Viya        | Step-by-Step Guide for Viya Workbench        |
 :-------------------------:|:-------------------------:|
-
 <a href="ppt/Model-Training-Viya.pptx"><img src="images/modelTrainingViya.png" width="500" alt="modelTrainingViya" /></a> | <a href="ppt/Model-Training-ViyaWorkbench.pptx"><img src="images/modelTrainingViyaWorkbench.png" width="500" alt="modelTrainingViyaWorkbench" /></a> |
 
 
