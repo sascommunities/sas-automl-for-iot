@@ -92,4 +92,4 @@ Step-by-Step Guide         |
 <a href="ppt/Clearblade.pptx"><img src="images/Clearblade.png" width="500" alt="Clearblade" /></a> |
 
 
-[![Back](../images/back.png 'Back')](configuring-data-sources/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](configuring-derived-attributes/README.md)
+[![Back](../images/back.png 'Back')](../configuring-data-sources/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../configuring-derived-attributes/README.md)

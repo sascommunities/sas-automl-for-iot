@@ -8,4 +8,4 @@ AI Assistant         | Step-by-Step Guide         |
 <a href="https://chatgpt.com/g/g-696bd6f346b48191b6cf205b81ada7cd-sas-automl-for-iot-assistant"> <img src="images/chatgpt.png" width="500" alt="chatgpt" /> </a> |  <a href="ppt/Working-with-AI-Assistant.pptx"><img src="images/workingWithAIAssistant.png" width="500" alt="workingWithAIAssistant" /></a> |
 
 
-![Back](../images/backgray.png "Back")   [![Home](../images/home.png 'Home')](enablement-home/README.md)   ![Next](../images/nextgray.png "Next") 
+![Back](../images/backgray.png "Back")   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   ![Next](../images/nextgray.png "Next") 

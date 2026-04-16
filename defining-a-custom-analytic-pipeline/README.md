@@ -19,4 +19,4 @@ Step-by-Step Guide         |
 More information about the sasviya.ml package can be found [here](https://go.documentation.sas.com/doc/en/workbenchcdc/v_001/workbenchwlcm/home.htm) and [here](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Workbench-Python-Machine-Learning-using-sasviya-ml-and/ta-p/932628). 
 
 
-![Back](../images/backgray.png "Back")     [![Home](../images/home.png 'Home')](enablement-home/README.md)   ![Next](../images/nextgray.png "Next") 
+![Back](../images/backgray.png "Back")     [![Home](../images/home.png 'Home')](../enablement-home/README.md)   ![Next](../images/nextgray.png "Next") 

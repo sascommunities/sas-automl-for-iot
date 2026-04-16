@@ -152,4 +152,4 @@ Step-by-Step Guide         |
 <a href="ppt/Configuring-Derived-Attributes-searchEvents.pptx"><img src="images/searchEvents.png" width="500" alt="searchEvents" /></a> |
 
 
-[![Back](../images/back.png 'Back')](describing-your-digital-twin/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](designing-output-tables-and-models/README.md)
+[![Back](../images/back.png 'Back')](../describing-your-digital-twin/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../designing-output-tables-and-models/README.md)

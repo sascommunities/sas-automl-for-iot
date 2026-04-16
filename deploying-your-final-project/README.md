@@ -84,4 +84,4 @@ Step-by-Step Guide         |
 <a href="ppt/Deploy-Realtime-Project.pptx"><img src="images/Deploy-Realtime-Project.png" width="500" alt="Deploy-Realtime-Project" /></a> |
 
 
-[![Back](../images/back.png 'Back')](configuring-output-locations/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](archiving-your-project/README.md)
+[![Back](../images/back.png 'Back')](../configuring-output-locations/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../archiving-your-project/README.md)

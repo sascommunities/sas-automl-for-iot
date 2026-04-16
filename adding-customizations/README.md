@@ -29,4 +29,4 @@ Step-by-Step Guide         |
 <a href="ppt/ESPCustomizations.pptx"><img src="images/ESPCustomizations.png" width="500" alt="ESPCustomizations" /></a> |
 
 
-[![Back](../images/back.png 'Back')](scoring-the-analytic-dataset/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](configuring-output-locations/README.md)
+[![Back](../images/back.png 'Back')](../scoring-the-analytic-dataset/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../configuring-output-locations/README.md)

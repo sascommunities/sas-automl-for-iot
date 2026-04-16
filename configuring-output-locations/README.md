@@ -28,4 +28,4 @@ Step-by-Step Guide         |
 
 
 
-[![Back](../images/back.png 'Back')](adding-customizations/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](deploying-your-final-project/README.md)
+[![Back](../images/back.png 'Back')](../adding-customizations/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../deploying-your-final-project/README.md)

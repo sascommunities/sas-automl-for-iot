@@ -139,4 +139,4 @@ Step-by-Step Guide         |
 <a href="ppt/FactoryMonitoringProject.pptx"><img src="images/factorymonitoring.png" width="500" alt="factorymonitoring" /></a> |
 
 
-[![Back](../images/back.png 'Back')](installation/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](enablement-home/README.md)
+[![Back](../images/back.png 'Back')](../installation/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../enablement-home/README.md)

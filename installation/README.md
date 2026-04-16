@@ -117,4 +117,4 @@ SPDX-License-Identifier: Apache-2.0
 
 <br>
 
-![Back](../images/backgray.png "Back")     [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](setting-up-your-first-project/README.md)
+![Back](../images/backgray.png "Back")     [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../setting-up-your-first-project/README.md)

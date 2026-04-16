@@ -22,7 +22,7 @@ Step-by-Step Guide         |
 
 ## Specifying Models to Train and Deploy
 
-The below powerpoint will walk you through the process of specifying the models that you would like to train and deploy. Again, this was designed to be simple and straightforward. Choose what you'd like to analyze, which attributes to use as predictors, a date range to use for training, and a model pipeline from one of the available options (or [design your own](defining-a-custom-analytic-pipeline/README.md)). Predictions from these ML models will appear as additional columns in your output tables.
+The below powerpoint will walk you through the process of specifying the models that you would like to train and deploy. Again, this was designed to be simple and straightforward. Choose what you'd like to analyze, which attributes to use as predictors, a date range to use for training, and a model pipeline from one of the available options (or [design your own](../defining-a-custom-analytic-pipeline/README.md)). Predictions from these ML models will appear as additional columns in your output tables.
 
 Step-by-Step Guide         |  
 :-------------------------:|
@@ -51,4 +51,4 @@ We've included a frequently asked questions section here to clarify a few common
     - You have total flexibility! When you follow the steps in "Specifying Models to Train and Deploy", you will notice that there is a field called modelGroupLogic. It has three options... "One Model Per AssetID" will train a separate model for each asset, "One Model Applicable to All Assets" will train a single model, and "One Model Per Unique AttributeID Value" will train a separate model for groups of assets. If you choose this last option, then you will need to also specify an attributeID to group on in a separate field (modelGroupByAttributeID).
 
 
-[![Back](../images/back.png 'Back')](configuring-derived-attributes/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](retrieving-historical-data/README.md)
+[![Back](../images/back.png 'Back')](../configuring-derived-attributes/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../retrieving-historical-data/README.md)

@@ -15,4 +15,4 @@ Step-by-Step Guide         |
 <a href="ppt/Specifying-Project-Information.pptx"><img src="images/specifyingprojectinfo.png" width="500" alt="specifyingprojectinfo" /></a> |
 
 
-[![Back](../images/back.png 'Back')](enablement-home/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](configuring-data-sources/README.md)
+[![Back](../images/back.png 'Back')](../enablement-home/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../configuring-data-sources/README.md)

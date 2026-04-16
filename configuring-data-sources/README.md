@@ -40,4 +40,4 @@ Step-by-Step Guide         |
 <a href="ppt/dataSources-clearblade.pptx"><img src="images/clearblade.png" width="500" alt="clearblade" /></a> |
 
 
-[![Back](../images/back.png 'Back')](specifying-project-information/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](describing-your-digital-twin/README.md)
+[![Back](../images/back.png 'Back')](../specifying-project-information/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../describing-your-digital-twin/README.md)

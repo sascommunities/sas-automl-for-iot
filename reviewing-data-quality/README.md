@@ -14,4 +14,4 @@ Step-by-Step Guide         |
 <a href="ppt/Reviewing-Data-Quality.pptx"><img src="images/dataQuality.png" width="500" alt="dataQuality" /></a> |
 
 
-[![Back](../images/back.png 'Back')](retrieving-historical-data/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](creating-analytic-datasets/README.md)
+[![Back](../images/back.png 'Back')](../retrieving-historical-data/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../creating-analytic-datasets/README.md)

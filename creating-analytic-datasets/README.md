@@ -51,4 +51,4 @@ Step-by-Step Guide         |
 <a href="ppt/Load-Output-Tables-Into-SAS.pptx"><img src="images/Load-Output-Tables-Into-SAS.png" width="500" alt="Load-Output-Tables-Into-SAS" /></a> |
 
 
-[![Back](../images/back.png 'Back')](reviewing-data-quality/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](model-training/README.md)
+[![Back](../images/back.png 'Back')](../reviewing-data-quality/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../model-training/README.md)

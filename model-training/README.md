@@ -12,4 +12,4 @@ Step-by-Step Guide for Viya        | Step-by-Step Guide for Viya Workbench      
 <a href="ppt/Model-Training-Viya.pptx"><img src="images/modelTrainingViya.png" width="500" alt="modelTrainingViya" /></a> | <a href="ppt/Model-Training-ViyaWorkbench.pptx"><img src="images/modelTrainingViyaWorkbench.png" width="500" alt="modelTrainingViyaWorkbench" /></a> |
 
 
-[![Back](../images/back.png 'Back')](creating-analytic-datasets/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](scoring-the-analytic-dataset/README.md)
+[![Back](../images/back.png 'Back')](../creating-analytic-datasets/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../scoring-the-analytic-dataset/README.md)

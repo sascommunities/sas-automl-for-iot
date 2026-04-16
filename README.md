@@ -185,4 +185,4 @@ Maintainers are not currently accepting patches and contributions to this projec
 This project is licensed under the [Apache 2.0 License](LICENSE).
 
 
-![Back](../images/backgray.png "Back")   [![Home](../images/home.png 'Home')](enablement-home/README.md)   [![Next](../images/next.png 'Next')](installation/README.md)
+![Back](images/backgray.png "Back")   [![Home](images/home.png 'Home')](enablement-home/README.md)   [![Next](images/next.png 'Next')](installation/README.md)

@@ -11,4 +11,4 @@ Step-by-Step Guide         |
 <a href="ppt/Archiving-a-Project.pptx"><img src="images/archivingProject.png" width="500" alt="archivingProject" /></a> |
 
 
-[![Next](../images/back.png 'Next')](deploying-your-final-project/README.md)   [![Home](../images/home.png 'Home')](enablement-home/README.md)   ![Back](../images/nextgray.png "Next") 
+[![Next](../images/back.png 'Next')](../deploying-your-final-project/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   ![Back](../images/nextgray.png "Next") 
