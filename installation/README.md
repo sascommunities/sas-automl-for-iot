@@ -111,7 +111,6 @@ Step-by-Step Guide for Viya        | Step-by-Step Guide for Viya Workbench |
 <a href="ppt/Installing-AutoMLforIoT-Viya.pptx"><img src="images/InstallAutoMLViya.png" width="500" alt="InstallAutoMLViya" /></a> | <a href="ppt/Installing-AutoMLforIoT-ViyaWorkbench.pptx"><img src="images/InstallAutoMLViyaWorkbench.png" width="500" alt="InstallAutoMLViyaWorkbench" /></a> |
 
 Copyright © 2026, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
-SPDX-License-Identifier: Apache-2.0
 
 <br>
 
