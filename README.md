@@ -174,15 +174,9 @@ Once you've installed what you need, this [page](setting-up-your-first-project/R
 
 As you work through designing and deploying your SAS AutoML for IoT project, you will find it useful to refer to resources on this [page](enablement-home/README.md). It provides supporting materials related to each step.
 
-
-## Contributing
-
-Maintainers are not currently accepting patches and contributions to this project.
-
-
 ## License
 
-This project is licensed under the [Apache 2.0 License](LICENSE).
+This project is licensed under the [SAS License Agreement for Corrective Code or Additional Functionality](LICENSE).
 
 
 ![Back](images/backgray.png "Back")   [![Home](images/home.png 'Home')](enablement-home/README.md)   [![Next](images/next.png 'Next')](installation/README.md)
