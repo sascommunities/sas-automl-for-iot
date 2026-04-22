@@ -70,7 +70,7 @@ Then, refer to each of the following sections as you configure your project step
 
 ## Support
 
-As noted in the support file on the main page, users may submit a GitHub issue or pull request to receive support regarding bug fixes, feature requests, etc. 
+As noted in the support file on the main page, users may submit a GitHub issue to receive support regarding bug fixes, feature requests, etc. 
 
 We recognize that designing and deploying a digital twin for your use case can be a complex task. Therefore, we've also set up a devoted email account for you to use to chat with our team regarding ideas around your use case - best practices, recommendations regarding specific use cases, etc. If you'd like to discuss your use case in more detail, feel free to email and we will respond as quickly as possible. Please do not include confidential information, personally identifiable information, or personal health information in any correspondence.
 
