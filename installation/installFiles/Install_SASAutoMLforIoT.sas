@@ -5,6 +5,7 @@
 ***********************************************************************;
 
 *INSTALL THE AUTOMLFORIOT DIRECTORY IN THE BELOW FOLDER;
+*SPECIFY WHETHER ENVIRONMENT IS VIYA WORKBENCH OR NOT;
 %global INSTALLDIRECTORY WORKBENCH;
 %let INSTALLDIRECTORY=/workspaces/volume;
 %let WORKBENCH=Y;
