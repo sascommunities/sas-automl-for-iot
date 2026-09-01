@@ -1,155 +1,258 @@
 # Configuring Derived Attributes
 
-In an ideal world, all information needed for your digital twin would broadcast as raw sensor data. However, typically this is not the case in practical applications. It is many times necessary to calculate additional metrics based on information available in your digital twin. For example, it may be important to know the value of a sensor from an hour ago, or the average reading over the past 30 minutes, or to aggregate information from connected assets, or just execute code.
+In an ideal world, all of the information needed for a digital twin would arrive directly as raw sensor data. In practical applications, however, it is often necessary to calculate additional metrics from the information that is already available in the digital twin.
 
-Derived attributes allow you to add new calculated measures to your digital twin - and they are configured simply by answering straightforward questions. Each attribute is described in detail in their sections below, and they are grouped based on their function as shown below. 
+For example, you might need to know:
 
+- the value of a sensor from an hour ago
+- the change in a measurement over a period of time
+- the average reading over the past 30 minutes
+- the total value across connected assets
+- the ID or label of a connected asset
+- the value of an attribute from another asset
+- the result of custom SAS calculation logic
 
-**These attributes will become part of your digital twin and you can use them later in your analytical models or output them to datasets you design. As shown below, these new attributes will appear in your digital twin in blue.**
+Derived attributes add these calculated measures to the digital twin. Once defined, they can be used in structured output tables and analytical models in the same way as other attributes.
 
-<img src="images/digitalTwinWithEnrichment.png" alt="digitalTwinWithEnrichment" />
+![Digital twin with derived attributes](images/digital-twin-with-enrichment.png)
 
-
-Below is a list of the derived attributes that are built-in to AutoML for IoT currently...
-
-* **Time-Focused Attributes**
-    * lag - store the value from a prior period
-    * delta - calculate the change in an attribute from one time to another
-    * temporalAgg - calculate the average/sum/min/max of an attribute over time
-
-* **Relationship-Focused Attributes**
-    * relationalAgg - calculated the average/sum/min/max of an attribute across connected assets
-    * countConn - obtain the number of parents or children for each asset
-    * getConn - obtain a specific assetID of a parent or child asset
-
-* **Retrieving Connected Asset IDs and Labels**
-    * getAssetID - store the ID of a connected asset 
-    * getAssetLabel - store the label of a connected asset 
-
-* **User-Written SAS Code**
-    * code - run customized SAS code that references one or multiple attributes from the digital twin
-
-* **Advanced**
-    * getValue - copy the value of an attributeID from one asset to another
-    * searchEvents - search recent events for a specific value and return the last time observed
-
-
-Each of these derived attributes is described in detail in the sections below. Click on a powerpoint to learn more about how they work and how to configure them to enrich your digital twin.
-
-Note that many derived attributes allow you to reference other derived attributes - so you can easily define an attribute and then use that attribute in yet another calculation. For example, a lag variable allows you to pull a sensor's value from some time ago. You could pull the value from an hour ago - that would be a 'static' lag. Or you could instead reference another derived attribute and the lag would become 'dynamic'. This is especially useful for manufacturing applications where the line speed could vary throughout the day.
-
+The current types of attribute types available in AutoML for IoT are described below.
 
 ## Time-Focused Attributes
 
-### lag 
+Time-focused derived attributes use current and historical values from the same asset type.
 
-The below powerpoint will walk you through how to configure a 'lag' derived attribute. This is used to retrieve the value of an attribute from some time ago.
+### Lag
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-lag.pptx"><img src="images/lag.png" width="500" alt="lag" /></a> |
+A `lag` attribute retrieves the value of an attribute from an earlier point in time.
 
+Examples include:
 
-### delta 
+- What was the pressure one hour ago?
+- What was the current 15 minutes ago?
 
-The below powerpoint will walk you through how to configure a 'delta' derived attribute. This is used to compute the change in an attribute from one time period to another.
+The lookback period can be a fixed number of seconds or, when supported by the project design, can be determined dynamically from another attribute.
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-delta.pptx"><img src="images/delta.png" width="500" alt="delta" /></a> |
+For details about selecting the target attribute, defining a fixed or dynamic lookback period, and entering both the high-level and lag-specific configuration, see [Configure a Lag Attribute](lag.md).
 
+### Delta
 
-### temporalAgg 
+A `delta` attribute calculates the difference in one attribute between two points in time.
 
-The below powerpoint will walk you through how to configure a 'temporalAgg' derived attribute. This is used to aggregate the value of an attribute over some time period (average, sum, min, max).
+Examples include:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-temporalAgg.pptx"><img src="images/temporalAgg.png" width="500" alt="temporalAgg" /></a> |
+- How much did the temperature change over the past hour?
+- How much did the river height increase during the past 30 minutes?
 
-<br>
+For details about defining the older and more recent comparison periods and entering the required configuration, see [Configure a Delta Attribute](delta.md).
+
+### Temporal Aggregation
+
+A `temporalAgg` attribute summarizes values over a period of time.
+
+Supported summary calculations include:
+
+- average
+- sum
+- minimum
+- maximum
+
+Examples include:
+
+- What was the average irradiance over the past 15 minutes?
+- What was the maximum temperature over the past hour?
+- What was the total energy used during the previous hour?
+
+For details about selecting the target attribute, summary calculation, time window, and historical-resolution requirements, see [Configure a Temporal Aggregation Attribute](temporal-aggregation.md).
 
 ## Relationship-Focused Attributes
 
-### relationalAgg 
+Relationship-focused derived attributes use the connections defined in the digital twin.
 
-The below powerpoint will walk you through how to configure a 'relationalAgg' derived attribute. This is used to aggregate the value of an attribute across connected assets.
+### Relational Aggregation
 
-Step-by-Step Guide         | 
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-relationalAgg.pptx"><img src="images/relationalAgg.png" width="500" alt="relationalAgg" /></a> |
+A `relationalAgg` attribute navigates a hierarchy and summarizes a value across connected assets.
 
+Supported summary calculations include:
 
-### countConn 
+- average
+- sum
+- minimum
+- maximum
 
-The below powerpoint will walk you through how to configure a 'countConn' derived attribute. This is used to count the number of connections (parent or child) for an asset.
+Examples include:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-countConn.pptx"><img src="images/countConn.png" width="500" alt="countConn" /></a> |
+- What is the total airflow from the fan powered boxes connected to this air handler?
+- What is the maximum damper position across connected fan powered boxes?
+- What is the total current from connected solar-panel strings?
 
+For details about selecting the hierarchy, navigation direction, number of levels, target attribute, and summary logic, see [Configure a Relational Aggregation Attribute](relational-aggregation.md).
 
-### getConn 
+### Count Connections
 
-The below powerpoint will walk you through how to configure a 'getConn' derived attribute. This is used to obtain the assetID for a connected asset (parent or child).
+A `countConn` attribute counts parent or child connections for an asset.
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-getConn.pptx"><img src="images/getConn.png" width="500" alt="getConn" /></a> |
+Examples include:
 
-<br>
+- How many patients are connected to this hospital?
+- How many child assets are connected to this piece of equipment?
+
+The calculation can also be restricted to a particular connected asset type when needed.
+
+For details about selecting the hierarchy, parent or child direction, optional asset-type filtering, and the asset whose connections should be counted, see [Configure a Count Connections Attribute](count-connections.md).
+
+### Get Connection
+
+A `getConn` attribute retrieves the asset ID of a particular parent or child connection.
+
+This is useful when you need a specific connection rather than a count of the available connections.
+
+For details about choosing the hierarchy, connection direction, instance number, search logic, and optional asset-type filtering, see [Configure a Get Connection Attribute](get-connection.md).
 
 ## Retrieving Connected Asset IDs and Labels
 
-### getAssetID 
+These attribute types retrieve identifying information from an asset or from its connected assets.
 
-The below powerpoint will walk you through how to configure a 'getAssetID' derived attribute. This is used to retrieve the ID of a connected asset.
+### Get Asset ID
 
-Step-by-Step Guide         | 
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-getAssetID.pptx"><img src="images/getAssetID.png" width="500" alt="getAssetID" /></a> |
+A `getAssetID` attribute makes an asset's `assetID` available as a normal attribute in the digital twin.
 
+This is especially useful when building output tables for dashboards. For example, a table focused on `string` assets might also include the IDs of the connected:
 
-### getAssetLabel 
+```text
+solarFarm
+inverter
+combinerBox
+string
+```
 
-The below powerpoint will walk you through how to configure a 'getAssetLabel' derived attribute. This is used to retrieve the label of a connected asset.
+Those ID fields make it easy for a dashboard to filter and drill from the solar farm level down to individual strings.
 
-Step-by-Step Guide         | 
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-getAssetLabel.pptx"><img src="images/getAssetLabel.png" width="500" alt="getAssetLabel" /></a> |
+For details about identifying the target asset type and validating that the connection is unambiguous, see [Configure a Get Asset ID Attribute](get-asset-id.md).
 
-<br>
+### Get Asset Label
+
+A `getAssetLabel` derived attribute makes an asset's human-readable `assetLabel` available as a normal attribute in the digital twin.
+
+This is especially useful for dashboard and reporting output. For example, a table focused on `string` assets might also include the labels of the connected:
+
+```text
+solarFarm
+inverter
+combinerBox
+string
+```
+
+Those label fields make it easier for users to understand, filter, and drill through the asset hierarchy without relying only on internal asset IDs.
+
+For details about identifying the target asset type and entering the required configuration, see [Configure a Get Asset Label Attribute](get-asset-label.md).
 
 ## User-Written SAS Code
 
-### code
+### Code
 
-The below powerpoint will walk you through how to configure a 'code' derived attribute. This is used to execute user-written code to compute a new metric using one or more attributes from the digital twin.
+A `code` derived attribute executes custom SAS code to calculate a new metric from one or more raw or derived attributes.
 
-Step-by-Step Guide         | 
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-code.pptx"><img src="images/code.png" width="500" alt="code" /></a> |
+This is the appropriate attribute type when the desired calculation is not represented by one of the built-in derived-attribute calculations.
 
-<br>
+For example, use a `code` attribute to calculate the difference between two different variables. A `delta` attribute should be used only when calculating the change in the **same** attribute between two points in time.
 
-## Advanced
+All attributes referenced by the SAS logic must be explicitly listed as inputs to the calculation, and the logic must be valid SAS code.
 
-### getValue 
+For details about defining the new attribute, listing its input attributes, writing the SAS calculation, and validating the required code entry, see [Configure a Custom SAS Code Attribute](custom-code.md).
 
-The below powerpoint will walk you through how to configure a 'getValue' derived attribute. This is used to copy the value of an attribute from a connected asset. For example, for flood prediction, what is the river's height for an upstream river segment. Or for patient monitoring, a hospital bed may measure blood pressure, but we'd like to associate that with the patient once it is measured.
+## Advanced Attributes
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-getValue.pptx"><img src="images/getValue.png" width="500" alt="getValue" /></a> |
+### Get Value
 
+A `getValue` attribute copies or retrieves a value from another asset.
 
-### searchEvents 
+This is useful when simply asking for an attribute from a connected asset would be ambiguous or when the target asset ID is stored as metadata.
 
-The below powerpoint will walk you through how to configure a 'searchEvents' derived attribute. This is used to search the individual updates/events for an attribute. This is unique in that most attributes utilize only the value that was current at the time the output record was generated - this attribute allows the user to actually search through all of the individual updates/events.
+Examples include:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Configuring-Derived-Attributes-searchEvents.pptx"><img src="images/searchEvents.png" width="500" alt="searchEvents" /></a> |
+- retrieve the gauge height from a specific upstream river segment
+- retrieve a measurement from a hospital bed currently associated with a patient
+- retrieve a value from an asset found by navigating a hierarchy in a specific direction
 
+A `getValue` calculation can either navigate a hierarchy using defined search rules or go directly to an asset ID stored in another attribute.
 
-[![Back](../images/back.png 'Back')](../describing-your-digital-twin/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../designing-output-tables-and-models/README.md)
+For details about selecting the target attribute, choosing the navigation method, and configuring hierarchy or known-asset-ID logic, see [Configure a Get Value Attribute](get-value.md).
+
+### Search Events
+
+A `searchEvents` attribute searches individual sensor updates that occurred during a defined time period.
+
+This differs from most interval-based derived attributes because it can inspect the individual events that occurred between output or history intervals.
+
+Depending on the configuration, it can be used to:
+
+- find minimum or maximum observed readings
+- average or sum individual readings
+- retrieve an ordered event such as the newest, second-newest, oldest, or second-oldest reading
+- determine when a particular value was observed
+
+For details about defining the search period, search logic, return value, event ordering, and optional filtering, see [Configure a Search Events Attribute](search-events.md).
+
+## How Derived Attributes Are Configured
+
+The details related to configuring each derived attribute type are presented in their respecitve sections. However, it is useful to note that each derived attribute is defined in two parts.
+
+First, the high-level information about each new attribute is provided in `derivedAttributes.json`. This identifies the asset type, attribute ID, SAS-compatible attribute ID, display label, attribute type, and data characteristics.
+
+Second, the details related to the calculation logic neeeded for that attribute is presented in a configuration specific to the selected derived-attribute type. For example:
+
+- a `lag` attribute also requires a record in `derivedAttributeDetails_lag.json`
+- a `temporalAgg` attribute also requires a record in `derivedAttributeDetails_temporalAgg.json`
+- a `relationalAgg` attribute also requires a record in `derivedAttributeDetails_relationalAgg.json`
+- a `code` attribute also requires a matching record in `userDefinedCode.json`
+
+The two definitions must remain consistent. For most derived-attribute types, the high-level record and the corresponding detail record are linked by `assetType/attributeID`. A `code` attribute is linked to its user-defined-code record through `SASAttributeID`.
+
+For details about the fields, supported values, calculation-specific settings, examples, and validation rules for each type, see the page for the derived attribute type of interest.
+
+## Derived Attributes Can Depend on Other Derived Attributes
+
+Many derived attributes can reference other derived attributes.
+
+For example, you can:
+
+1. calculate a rolling average
+2. use that rolling average as the target of another derived calculation
+3. use the resulting derived attribute in an output table or machine learning model
+
+For example:
+
+```text
+string/current_A
+    ↓
+string/current_A_15m_avg
+    ↓
+solarFarm/totalCurrent_15m_avg
+```
+
+In this example, the raw string current is first summarized over time and the resulting measure is then aggregated across connected assets.
+
+## Validate Derived Attributes
+
+Before moving on from this section, confirm that:
+
+- every derived attribute references a valid asset type
+- every `attributeID` is unique within its asset type
+- no derived `assetType/attributeID` duplicates a raw attribute
+- every `SASAttributeID` follows SAS variable-name rules and is no more than 30 characters
+- every `attributeType` uses a supported derived-attribute type
+- every derived attribute has the required matching type-specific detail record
+- every `code` attribute has a matching `userDefinedCode.json` record
+- all referenced raw and derived attributes exist
+- all hierarchy references exist when hierarchy-based logic is used
+
+Because each derived attribute is configured in both a high-level definition and a type-specific definition, validate both parts before proceeding to the next attribute.
+
+## Previous
+
+If you need to review the asset types, raw attributes, assets, metadata, or hierarchies that derived calculations depend on, see [Describing Your Digital Twin](../describing-your-digital-twin/README.md).
+
+## Next
+
+After the digital twin has been enriched with the calculated measures needed for the use case, define the structured output tables and analytical models that should use those attributes. For details about the next step, see [Designing Output Tables and Models](../designing-output-tables-and-models/README.md).

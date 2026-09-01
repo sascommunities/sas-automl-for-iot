@@ -1,54 +1,121 @@
 # Designing Output Tables and Models
 
-In the previous steps, you defined your digital twin and enriched it with new calculated metrics (derived attributes).
+In the previous steps, you defined the digital twin and enriched it with any calculated metrics needed for the use case.
 
-Now, you will choose what to output and what to model using that digital twin. Specifically, you will design the output tables that you would like to create and specify the models you would like to train. Both tasks have been designed to be simple and straightforward. 
+Now decide what AutoML for IoT should **output** and what it should **model**.
 
-Depending on your use case, you may want to use **ONE** or **BOTH** of these options. In some cases, you may just want to train and deploy models and really are only concerned with obtaining model predictions. In other cases, the focus may be on obtaining nicely structured output tables that can be used to drive dashboards and visualizations. And in many cases, you will want to do both.
+Depending on the project, you can use either or both options:
 
-Generally, we suggest that new users begin by defining an output table or two - and then later add models once you've had a chance to review the analytic-ready datasets.
+- **Output tables** organize selected digital-twin attributes into structured datasets for analysis, dashboards, reporting, or downstream processing.
+- **Models** define the machine learning targets, predictors, training period, grouping strategy, and analytical pipeline that AutoML for IoT should train and deploy.
 
-The sections below cover in detail how to design the output tables and models that you want.
+For new users, it is often useful to define one or two output tables first. This makes it easier to review the analytic-ready data before adding machine learning models.
 
+## Where the Configuration Goes
+
+Output tables and analytical models are configured under:
+
+```text
+Phase-1---Project-Definition/
+└── 04_defineOutputAndModels/
+    ├── outputDefinitions.json
+    ├── modelDefinitions.json
+    ├── processDefinitions.sas
+    └── queryAvailablePipelines.sas
+```
+
+Use the two configuration files for different purposes:
+
+| File | Purpose |
+|---|---|
+| `outputDefinitions.json` | Defines the output tables AutoML for IoT should create and the attributes that should be included in those tables. |
+| `modelDefinitions.json` | Defines the analytical models to train, including the target, predictors, and model-related settings. |
+
+After the output and model definitions are complete, run `processDefinitions.sas` to validate and integrate the configuration.
+
+If you need to review the analytic pipelines available for model definitions, run `queryAvailablePipelines.sas`.
 
 ## Designing Output Tables
 
-The below powerpoint will walk you through the process of designing your output tables. This is a simple step - and really just involves you choosing the attributes that you would like to output for each table.
+An output table is created for a selected asset type. At each project output interval, AutoML for IoT generates records for the assets of that type and includes the attributes you selected as columns.
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Designing-Output-Tables.pptx"><img src="images/outputTables.png" width="500" alt="outputTables" /></a> |
+The selected columns can come from:
 
+- the output table's own asset type
+- connected asset types, when the relationship is unambiguous
+- raw attributes
+- derived attributes
+
+For details about selecting the output-table asset type, choosing attributes, understanding the resulting columns and row structure, and entering the required output configuration, see [Design Output Tables](output-tables.md).
 
 ## Specifying Models to Train and Deploy
 
-The below powerpoint will walk you through the process of specifying the models that you would like to train and deploy. Again, this was designed to be simple and straightforward. Choose what you'd like to analyze, which attributes to use as predictors, a date range to use for training, and a model pipeline from one of the available options (or [design your own](../defining-a-custom-analytic-pipeline/README.md)). Predictions from these ML models will appear as additional columns in your output tables.
+A model definition describes:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Designing-Models.pptx"><img src="images/models.png" width="500" alt="models" /></a> |
+- the attribute to predict
+- the predictor attributes
+- the historical date range used for training
+- the analytical pipeline
+- whether models are trained per asset, across all assets, or by groups of assets
 
-## FAQ
+Predictions from trained models can later become part of the project output.
 
-We've included a frequently asked questions section here to clarify a few common questions...
+For details about selecting targets and predictors, choosing a model grouping strategy, reviewing available pipelines, defining the training period, and entering the required model configuration, see [Specify Models to Train and Deploy](models.md).
 
-- What if I just want to output nicely formatted tables and am not ready for models yet?
-    - Then just configure your output tables by following the steps shown in "Designing Output Tables". 
+## You Can Configure One or Both
 
-- If I start by just outputting tables, can I add models later?
-    - Yes! Just return to this step when you are ready and follow the steps shown in "Specifying Models to Train and Deploy". Model predictions will automatically get added to your output tables.
+You do not need to configure both output tables and models at the same time.
 
-- Do I need to output a table for every asset type?
-    - No. You can output tables for only the asset types that you are interested in. Keep this in mind... in each output table, you can request information from connected asset types. For example, for my solar farm application, in my output table focused on combiner boxes, I can request attributes for combiner boxes AND inverters AND the solar farm itself. 
-    
-- How do I know what model pipelines are available?
-    - Run the queryAvailablePipelines program in the 04_defineOutputAndModels directory. This will create a list of the available model pipelines in _reviewModelPipelineList.xlsx.
+### Output Tables Only
 
-- Is it possible to define my own model pipeline?
-    - Yes! There are a few guidelines you will need to follow. Refer to this [page](../defining-a-custom-analytic-pipeline/README.md) to learn how to define your own model pipeline.
+If the immediate goal is to create structured, analytic-ready datasets, define the required output tables and leave model definitions for later.
 
-- Do I need to train a different model for every asset?  Is it possible to create a model for a group of assets?
-    - You have total flexibility! When you follow the steps in "Specifying Models to Train and Deploy", you will notice that there is a field called modelGroupLogic. It has three options... "One Model Per AssetID" will train a separate model for each asset, "One Model Applicable to All Assets" will train a single model, and "One Model Per Unique AttributeID Value" will train a separate model for groups of assets. If you choose this last option, then you will need to also specify an attributeID to group on in a separate field (modelGroupByAttributeID).
+You can return to this section and add models after reviewing the generated data.
 
+### Models Only
 
-[![Back](../images/back.png 'Back')](../configuring-derived-attributes/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../retrieving-historical-data/README.md)
+If the primary goal is model training and scoring, define the required model specifications. The project workflow will use those definitions during later training and deployment phases.
+
+### Output Tables and Models
+
+Many projects use both. Output tables provide reusable analytic datasets and model predictions add analytical results to the digital twin and downstream output.
+
+## You Do Not Need an Output Table for Every Asset Type
+
+Create output tables only for the asset types that matter to the use case.
+
+A table focused on one asset type can also include attributes from connected asset types when the relationship is unambiguous.
+
+For example, a combiner-box table might include:
+
+- a combiner-box temperature
+- an inverter-level measure
+- a solar-farm irradiance measure
+
+If multiple connected assets could satisfy the same request, first create an appropriate derived attribute that makes the desired relationship explicit.
+
+For details about connection-based calculations, see [Configuring Derived Attributes](../configuring-derived-attributes/README.md).
+
+## Integrate the Definitions
+
+After the required output and model definitions are complete, run:
+
+```text
+04_defineOutputAndModels/processDefinitions
+```
+
+This checks the definitions and integrates them into the project.
+
+The detailed output-table and model pages show the corresponding review workflow.
+
+## Previous
+
+If you need to review or add calculated metrics before choosing outputs and models, see [Configuring Derived Attributes](../configuring-derived-attributes/README.md).
+
+## Next
+
+After output tables and model definitions are complete, the next phase prepares the historical sensor data required for analytic dataset creation and model training. For details, see [Retrieving Historical Data](../retrieving-historical-data/README.md).
+
+## Related Information
+
+For the asset types, raw attributes, assets, metadata, and hierarchies referenced by output and model definitions, see [Describing Your Digital Twin](../describing-your-digital-twin/README.md).

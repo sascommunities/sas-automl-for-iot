@@ -24,22 +24,16 @@ SAS AutoML for IoT is a guided process that leads the user through all of the ne
 
 - [Follow step-by-step instructions](#step-by-step-instructions) to complete each part of the process
 
-- [Chat with an AI assistant](../working-with-the-ai-assistant/README.md) regarding your use case. The assistant is aware of the capabilities of the approach and is well versed in the structure of every configuration file needed. In addition, it can provide useful suggestions at many steps of the process which can enrich your project with new ideas you may not have otherwise considered. 
+- [Chat with an AI assistant](../working-with-the-ai-assistant/README.md) regarding your use case. The assistant is aware of the capabilities of the approach and is well versed in the structure of every configuration file needed. In addition, it can provide useful suggestions at many steps of the process which can enrich your project with new ideas you may not have otherwise considered. At the end of the conversation, the assistant will provide you with a consolidated json file that you can import into AutoML for IoT.
 
 
 ### Step-by-Step Instructions
 
-This section provides step-by-step instructions for each step of the process. It is organized to match the structure of each project directory. As you configure your project, refer to the applicable directory below for guidance related to each step. Note that most screenshots have been taken in Viya, but the steps are almost identical in Viya Workbench. Model training is different in Viya vs. Viya Workbench, so you will notice that section has a different set of instructions for each environment.
+This section provides step-by-step instructions for each step of AutoML for IoT's guided process. 
 
-If you haven't already done so... make sure you have set yourself up as a user and create a new project - refer to the slides below if needed...
+![AutoML for IoT process overview](images/phaseWorkflow.png)
 
-
-Setting Up a New User        | Setting Up a New Project       |
-:-------------------------:|:-------------------------:|
-<img src="images/newUser.png" width="500" alt="newuser" /> | <img src="images/newProject.png" width="500" alt="newproject" /> |
-
-
-Then, refer to each of the following sections as you configure your project step by step...
+It is organized to match the structure of each project directory. As you configure your project, refer to the applicable directory below for guidance related to each step. Note that most screenshots have been taken in Viya, but the steps are almost identical in Viya Workbench. Model training is different in Viya vs. Viya Workbench, so you will notice that section has a different set of instructions for each environment.
 
 - **Phase-1---Project-Definition**
     - [Specifying Project Information](../specifying-project-information/README.md)
@@ -69,8 +63,6 @@ Then, refer to each of the following sections as you configure your project step
 
 
 ## Support
-
-As noted in the support file on the main page, users may submit a GitHub issue to receive support regarding bug fixes, feature requests, etc. 
 
 We recognize that designing and deploying a digital twin for your use case can be a complex task. Therefore, we've also set up a devoted email account for you to use to chat with our team regarding ideas around your use case - best practices, recommendations regarding specific use cases, etc. If you'd like to discuss your use case in more detail, feel free to email and we will respond as quickly as possible. Please do not include confidential information, personally identifiable information, or personal health information in any correspondence.
 

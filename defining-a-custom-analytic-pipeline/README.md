@@ -1,22 +1,53 @@
 # Defining a Custom Analytic Pipeline
 
-Several different analytic pipelines are included in SAS Model Studio, and a few additional custom python-based and sas-based pipelines are provided as part of AutoML for IoT. These are great to get started, but fundamentally, the process is designed for YOU to integrate the analytical approaches that you would like to use in your projects. The included pipelines are more intended to be a guide to assist you in that process.
+Each model definition references a `pipelineID`. That pipeline defines the analytical process used to train the model, including the modeling techniques that are built and compared.
 
-The below powerpoint will walk you through step-by-step what's needed to define a new analytic pipeline using one of three different approaches...
+AutoML for IoT includes several existing pipelines, but the documented workflow also supports creating your own.
 
-- Model Studio (drag-and-drop functionality which integrates directly with SAS Model Manager)
-- Custom Python (using common packages such as sklearn and sasviya.ml)
-- Custom SAS (using SAS code and built-in capabilities that allows those models to be managed by Model Manager)
+There are three supported custom pipeline approaches:
 
-Once defined, any newly-defined pipelines can be referenced in the modelDefinitions file as the pipeline ID. 
+- [Model Studio](model-studio-pipeline.md)
+- [Custom Python](python-pipeline.md)
+- [Custom SAS](sas-pipeline.md)
 
+After a new pipeline is available, run `queryAvailablePipelines` to identify the pipeline ID that can be referenced by the model definition.
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Defining-a-Custom-Analytic-Pipeline.pptx"><img src="images/customPipeline.png" width="500" alt="customPipeline" /></a> |
+## Existing Pipelines
 
+Before creating a custom pipeline, review the pipelines already available to AutoML for IoT by running the queryAvailablePipelines program.
 
-More information about the sasviya.ml package can be found [here](https://go.documentation.sas.com/doc/en/workbenchcdc/v_001/workbenchwlcm/home.htm) and [here](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Workbench-Python-Machine-Learning-using-sasviya-ml-and/ta-p/932628). 
+![Query available pipelines](images/query-available-pipelines.png)
 
+The resulting pipeline list can be reviewed in the same directory in this Excel file:
 
-![Back](../images/backgray.png "Back")     [![Home](../images/home.png 'Home')](../enablement-home/README.md)   ![Next](../images/nextgray.png "Next") 
+```text
+_reviewModelPipelineList.xls
+```
+
+Use the pipeline ID associated with your new pipeline as the `pipelineID` in the relevant model definition.
+
+## Choose an Approach for Developing a New Pipeline
+
+### Model Studio
+
+Use Model Studio when you want to create the modeling workflow using Model Studio's visual pipeline capabilities and integrate the resulting models with SAS Model Manager.
+
+See [Create a Model Studio Pipeline](model-studio-pipeline.md).
+
+### Custom Python
+
+Use a custom Python pipeline when you want model training to run from Python code and produce a `.pkl` model artifact.
+
+The simplest approach is to copy a current working Python pipeline and change only the model-specific training, assessment, outputs, and scoring logic while retaining the common AutoML for IoT function interface and model-packaging structure.
+
+See [Create a Custom Python Pipeline](python-pipeline.md).
+
+### Custom SAS
+
+Use a custom SAS pipeline when you want model training to run through SAS code and produce either SAS score code or an `astore`.
+
+See [Create a Custom SAS Pipeline](sas-pipeline.md).
+
+## Related Information
+
+Custom pipelines are referenced from model definitions. For model targets, predictors, grouping options, dates, and pipeline selection, see [Define Models](../designing-output-tables-and-models/models.md).

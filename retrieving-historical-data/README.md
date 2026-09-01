@@ -1,30 +1,69 @@
 # Retrieving Historical Data
 
-In order to train analytical models, it is necessary to replay historical data for some time period. One of the unique features of AutoML for IoT is that it can replay historical data as if it were live - so generating a historical analytic-ready dataset for training is a snap.
+AutoML for IoT can replay historical sensor data **as if the measurements were arriving live**. This replay is used to build the analytic datasets needed for model training.
 
-Please choose one of the options below...
+There are two ways to prepare the raw historical data:
 
-- [I set up a database connection or connection to ClearBlade earlier](#retrieving-historical-data-from-an-existing-data-source) - If you set up a database connection in the data sources section earlier - or you configured a connection to ClearBlade - then you already have the historical data you'll need. SAS AutoML for IoT can retrieve the necessary data in just a few minutes. 
+1. **Retrieve it automatically from a configured data source.**
+2. **Create `historicalData.csv` manually.**
 
-- [I need to create my historical data file manually](#creating-the-historical-data-file-manually) - It is easy to set up a historical data file - there are just a few columns to populate - and the instructions will provide everything you need to know. 
+## Path 1: Retrieve Historical Data from a Configured Data Source
 
+If you configured a historical database or ClearBlade connection earlier in the project, AutoML for IoT can use that configuration to retrieve the historical records for you.
 
-## Retrieving Historical Data from an Existing Data Source
+The retrieval process creates:
 
-Click on the powerpoint below to see how to retrieve the necessary historical data via your configured data source(s). 
+```text
+<projectName>/data/input/historicalData.csv
+```
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Retrieving-Historical-Data.pptx"><img src="images/Retrieving-Historical-Data.png" width="500" alt="Retrieving-Historical-Data" /></a> |
+and places the retrieved sensor updates into the format required for historical replay.
 
+For details about running the retrieval program, selecting the historical period, monitoring progress, and validating the generated file, see [Retrieve Historical Data from a Configured Data Source](retrieve-from-data-source.md).
 
-## Creating the Historical Data File Manually
+## Path 2: Create `historicalData.csv` Manually
 
-The below powerpoint will walk you through the process of creating the historical raw data file manually.
+If the historical measurements are coming from another source, the user will manually create:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Creating-Historical-Data-File.pptx"><img src="images/Creating-Historical-Data-File.png" width="500" alt="Creating-Historical-Data-File" /></a> |
+```text
+<projectName>/data/input/historicalData.csv
+```
 
+The format is intentionally simple.
 
-[![Back](../images/back.png 'Back')](../designing-output-tables-and-models/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../reviewing-data-quality/README.md)
+For an ordinary project, **each row represents one update to one sensor value in the digital twin**.
+
+For the exact field order, ESP field meanings, timestamp details, examples, and validation rules, see [Create the Historical Data File Manually](create-historical-data.md).
+
+## If the Digital Twin Changes Over Time
+
+Most projects replay sensor measurements against a digital twin whose assets and connections stay fixed.
+
+Some projects are dynamic. In this case, assets can be added or removed, or connections between assets can change while the project runs.
+
+When the project information config is set to allow dynamic changes:
+
+```text
+allowDynamicChangesToTwin = "Y"
+```
+
+the historical replay can include those asset and connection changes along with ordinary sensor updates.
+
+In that situation, `historicalData.csv` uses an expanded 18-field structure so the replay can reproduce both:
+
+- changes to sensor values
+- changes to the structure of the digital twin
+
+The manual-creation page shows the full dynamic structure and an example that mixes sensor, asset, and connection updates in timestamp order.
+
+## Why the Order Matters
+
+Historical replay processes the rows chronologically.
+
+As each record is processed, AutoML for IoT updates the state of the digital twin. At the configured output times, it can then calculate derived attributes, assemble output tables, and create the historical analytic data needed for model training.
+
+That is why the CSV must be sorted in nondecreasing timestamp order.
+
+## Next
+
+After the historical dataset is available and validated, continue to [Reviewing Data Quality](../reviewing-data-quality/README.md).

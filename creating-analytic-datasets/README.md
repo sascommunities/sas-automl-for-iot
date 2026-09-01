@@ -1,54 +1,116 @@
 # Creating Analytic Datasets
 
-Earlier, you designed your digital twin and specified the output tables you would like to create and the models that you would like to train. And all of this was done via a few simple configuration files. Now, AutoML for IoT will replay your historical data to create the analytic datasets requested. All of the steps required have been **fully automated**, but we've included a few separate programs to address each of the steps needed. 
+Earlier in the project, you defined the digital twin, selected the output tables to generate, and specified any models that should be trained.
 
-At a high level, the following steps will be performed by AutoML for IoT...
+This phase uses the historical replay project to transform the raw historical sensor updates into the structured analytic datasets requested earlier.
 
-- builds the SAS Event Stream Processing project needed to replay historical data to create the output tables needed (including loading the project to SAS Event Stream Processing Studio and SAS Event Stream Manager)
+The workflow is automated but is intentionally split into several interactive tasks:
 
-- replays the historical data using SAS Event Stream Processing Studio
+1. [Build the SAS Event Stream Processing Projects](build-esp-projects.md)
+2. [Replay Historical Data to Create Analytic Datasets](replay-historical-data.md)
+3. [Copy the Output Tables to the Project Directory](retrieve-analytic-datasets.md)
+4. [Optionally Load and Review the Output Tables in SAS](review-analytic-datasets-in-sas.md)
 
-- copies the output tables from the SAS Event Stream Processing server to your project directory
+## What This Phase Produces
 
-- OPTIONAL - loads the output tables into SAS datasets for review in Viya / Viya Workbench
+Real-time analytics projects typically begin with a stream of simple sensor updates. Each incoming record represents **one sensor value changing for one asset at one point in time**.
 
-Each of these steps is described in detail in the sections below. Each step is **fully automated**, but the user will complete them interactively.
+Consider a simple solar farm with this structure:
 
+```text
+solarFarm01
+├── combinerBoxA
+│   ├── stringA1
+│   └── stringA2
+└── combinerBoxB
+    ├── stringB1
+    └── stringB2
+```
 
-## Build the SAS Event Stream Processing Project
+The solar farm measures irradiance, each combiner box measures temperature, and each string measures current.
 
-The below powerpoint will show you how SAS AutoML for IoT can automatically build the SAS Event Stream Processing project needed to replay your historical data. You will learn where that project is created and how the project is structured.
+A simplified portion of the historical sensor data might therefore look like this:
 
-Step-by-Step Guide         | 
-:-------------------------:|
-<a href="ppt/Build-ESP-Project.pptx"><img src="images/Build-ESP-Project.png" width="500" alt="Build-ESP-Project" /></a> |
+| Time | Asset ID | Attribute | Value |
+|---|---|---|---:|
+| 10:00:01 | solarFarm01 | irradiance | 612 |
+| 10:00:14 | stringA1 | current_A | 8.4 |
+| 10:00:22 | stringA2 | current_A | 8.2 |
+| 10:00:41 | combinerBoxA | temperature_C | 31.2 |
+| 10:01:08 | stringB1 | current_A | 8.5 |
+| 10:01:19 | stringB2 | current_A | 8.3 |
+| 10:01:46 | combinerBoxB | temperature_C | 31.6 |
+| 10:02:11 | solarFarm01 | irradiance | 625 |
 
+This event-style structure is natural for a live sensor feed. Each sensor reports its own update when a new value becomes available. The result, however, is not yet an analytic-ready table: measurements from related assets arrive independently, at different times, and on separate rows.
 
-## Replay the Historical Raw Data using SAS Event Stream Processing
+During historical replay, AutoML for IoT processes those records in time order and reconstructs what the digital twin would have looked like as the project ran live. It calculates the configured derived attributes and creates the output tables that you defined earlier.
 
-The below powerpoint will show you how SAS AutoML for IoT can automatically replay your historical dataset. It will show you what you will see during the replay as well as how to view the running project in SAS Event Stream Processing Studio.
+For example, suppose you configured a **string-level output table with a 5-minute output interval** containing:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Replay-Historical-Data.pptx"><img src="images/Replay-Historical-Data.png" width="500" alt="Replay-Historical-Data" /></a> |
+- solar farm irradiance
+- the string's current
+- the temperature of the combiner box connected to that string
 
+The resulting analytic dataset could look like this:
 
-## Copy the Output Tables from the SAS Event Stream Processing Server to Your Project Directory
+| Output Time | String | Solar Farm Irradiance | String Current | Combiner Box Temperature |
+|---|---|---:|---:|---:|
+| 10:00 | stringA1 | 612 | 8.4 | 31.2 |
+| 10:00 | stringA2 | 612 | 8.2 | 31.2 |
+| 10:00 | stringB1 | 612 | 8.5 | 31.6 |
+| 10:00 | stringB2 | 612 | 8.3 | 31.6 |
+| 10:05 | stringA1 | 625 | 8.6 | 31.4 |
+| 10:05 | stringA2 | 625 | 8.4 | 31.4 |
+| 10:05 | stringB1 | 625 | 8.7 | 31.8 |
+| 10:05 | stringB2 | 625 | 8.5 | 31.8 |
 
-The below powerpoint will show you how to copy the output tables from the SAS Event Stream Processing server back to your project directory so that the files can later be used for model training.
+Notice how the digital twin brings the related information together:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Copy-Output-Tables.pptx"><img src="images/Copy-Output-Tables.png" width="500" alt="Copy-Output-Tables" /></a> |
+- `stringA1` and `stringA2` receive the temperature from their connected `combinerBoxA`.
+- `stringB1` and `stringB2` receive the temperature from their connected `combinerBoxB`.
+- all four strings receive irradiance from their connected `solarFarm01`.
+- each string retains its own current measurement.
 
+Instead of separate sensor events, you now have **regularly timed, structured analytic records with the related values side by side**.
 
-## OPTIONAL - Load and Review the Output Tables as SAS Datasets
+The exact columns and output frequency depend on the output tables you configured earlier. In this example, the 5-minute output interval creates one analytic record every five minutes for each string.
 
-The below powerpoint will show you how to load the output tables into SAS datasets. With the datasets in SAS, you can explore the data using various SAS procedures, explore correlations between variables and experiment with different modeling approaches.
+These structured output tables become the analytic datasets that can be used for:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/Load-Output-Tables-Into-SAS.pptx"><img src="images/Load-Output-Tables-Into-SAS.png" width="500" alt="Load-Output-Tables-Into-SAS" /></a> |
+- model training
+- exploratory analysis
+- reviewing predictor and target behavior
+- downstream SAS analysis
 
+## The Four Tasks
 
-[![Back](../images/back.png 'Back')](../reviewing-data-quality/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../model-training/README.md)
+### 1. Build the ESP Projects
+
+Run `buildESPProjects` to generate the SAS Event Stream Processing projects used for historical replay and real-time testing.
+
+For details, see [Build the SAS Event Stream Processing Projects](build-esp-projects.md).
+
+### 2. Replay the Historical Data
+
+Run `createAnalyticDatasets` to deploy the historical ESP project, replay `historicalData.csv`, generate output records, and shut down the temporary ESP deployment when processing completes.
+
+For details, see [Replay Historical Data to Create Analytic Datasets](replay-historical-data.md).
+
+### 3. Retrieve the Output Tables
+
+Run `retrieveAnalyticDatasets` to copy the generated analytic datasets from the ESP server back into the project directory.
+
+For details, see [Copy the Output Tables to the Project Directory](retrieve-analytic-datasets.md).
+
+### 4. Optionally Review the Data in SAS
+
+If you want to inspect the analytic datasets in SAS, use `reviewAnalyticDatasetsInSAS`.
+
+This optional step can load a selected output table into a SAS library so you can inspect the records, explore relationships among variables, or experiment with modeling approaches.
+
+For details, see [Load and Review Analytic Datasets in SAS](review-analytic-datasets-in-sas.md).
+
+## Next
+
+After the analytic datasets are available, continue to the model-training phase. For details, see [Model Training](../model-training/README.md).

@@ -1,32 +1,70 @@
 # Adding Customizations
 
-Thus far, AutoML for IoT has simplified the process of transforming your simple sensor data into analytic-ready datasets, and it has trained and integrated machine learning models for all of your key metrics and settings.
+After the analytic datasets have been scored, you can optionally add custom logic to the project.
 
-Now, you have the option to add some customizations to finish up your project. There are two types of customizations you can make...
+AutoML for IoT supports two customization paths in this section:
 
-- Business Rules - this is code that will run on your final analytic-ready datasets. You have designed your output tables and integrated model predictions. Now, you can choose to write new variables that use any/all of those columns. For example, compare actual and predicted values and create an alert variable if they are far from one another. Or calculate a new metric that uses the model predictions - for example, actual power generation divided by predicted would give you a measure of efficiency. For each variable, you'll just need to provide a list of the other variables you will reference and the code itself. The orchestration is managed by AutoML for IoT.
+- **Business Rules** — create new variables after model predictions have been added to the scored output tables.
+- **ESP Customizations** — add SAS Event Stream Processing windows, edges, connectors, or related ESP content to the generated project.
 
-- ESP Customizations - SAS Event Stream Processing has many different capabilities - there are windows that will train models as the data arrives, calculate Shapley values, examine the data for specific patterns, etc. This section allows you to add ESP windows to your project. Generally, users will explore the ESP project that AutoML for IoT wrote in SAS Event Stream Processing Studio. Then, the user will drag in new windows and connect them in their existing project. Once done, the user can copy the content they've added into the appropriate spots in the AutoML for IoT config files. Then, anytime you make changes to the AutoML for IoT project going forward, these customizations will always automatically be integrated into the final project.
+You can use one, both, or neither option.
 
-Both of these options is discussed in the following sections in detail. Users can choose to use one, both, or neither of these options. If you do not want to integrate either option, you can skip this step entirely.
+## Where You Work
 
+Customization work is contained under:
 
-## Defining Business Rules 
+```text
+Phase-4---Customizations
+```
 
-The below powerpoint will walk you through the process of defining business rules, testing them out to ensure they will have the desired result, and then integrating them into your AutoML for IoT project.
+The two high-level directories correspond directly to the two customization paths:
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/BusinessRules.pptx"><img src="images/BusinessRules.png" width="500" alt="BusinessRules" /></a> |
+```text
+Phase-4---Customizations
+├── 10_defineBusinessRules
+└── 11_defineESPCustomizations
+```
 
+- Use `10_defineBusinessRules` to define and optionally test calculations that operate on scored output-table columns.
+- Use `11_defineESPCustomizations` to add native ESP windows, edges, connectors, or related ESP content.
 
-## Adding ESP Customizations 
+## Business Rules
 
-The below powerpoint will walk you through the process of integrating additional ESP windows, edges, etc. into your ESP project.
+Business rules are calculated from columns already available in a scored output table.
 
-Step-by-Step Guide         | 
-:-------------------------:|
-<a href="ppt/ESPCustomizations.pptx"><img src="images/ESPCustomizations.png" width="500" alt="ESPCustomizations" /></a> |
+Typical uses include:
 
+- compare an actual value with its model prediction
+- create an alert when actual behavior differs from expected behavior
+- calculate a recommendation from sensor values and model results
+- create a new metric based on model output, such as actual divided by predicted performance
 
-[![Back](../images/back.png 'Back')](../scoring-the-analytic-dataset/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../configuring-output-locations/README.md)
+For details about reviewing the scored table, defining the new variable, declaring its dependencies, writing SAS DS2 logic, optionally testing the rules, and incorporating them into the final ESP project, see [Define Business Rules](business-rules.md).
+
+## ESP Customizations
+
+ESP customizations are used when you need native SAS Event Stream Processing capabilities beyond the automatically generated project.
+
+The documented workflow is to:
+
+1. open the generated scoring project in ESP Studio
+2. add and test the desired windows and edges
+3. view the XML generated by ESP Studio
+4. copy only the new XML into the documented customization sections
+5. identify any new connectors so they are orchestrated correctly
+
+For details, see [Add ESP Customizations](esp-customizations.md).
+
+## Integration into Final Projects
+
+Both business rules and ESP customizations are incorporated during the later deployment step when the final ESP projects are built.
+
+These customizations are integrated into **both** the historical and real-time projects.
+
+## Previous
+
+If you have not yet generated and reviewed the scored historical datasets, see [Scoring Analytic Datasets](../scoring-the-analytic-dataset/README.md).
+
+## Next
+
+After optional project customizations are complete, configure where project output should be written. See [Configuring Output Locations](../configuring-output-locations/README.md).

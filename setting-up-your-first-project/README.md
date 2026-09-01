@@ -1,142 +1,201 @@
-# Setting Up Your First Project 
+# Setting Up Your First Project
 
-## Setting Yourself Up as a New User
+After installing AutoML for IoT, choose the setup task you need.
 
-You've installed the code. Now you need to register yourself as a user. 
+## On This Page
 
-The below powerpoint will walk you through the process of setting yourself up as a new SAS AutoML for IoT user.
+- **[Set Up a New AutoML for IoT User](#set-up-a-new-automl-for-iot-user)** — Set yourself up as an AutoML for IoT user.
+- **[Create a New Project](#create-a-new-project)** — Start with a new blank AutoML for IoT project.
+- **[Import an Existing Project](#import-an-existing-project)** — Import a saved, training, example, or AI-assisted project.
 
-Step-by-Step Guide for Viya        |Step-by-Step Guide for Viya Workbench        |
-:-------------------------:|:-------------------------:|
-<a href="ppt/Setting-Up-New-User-Viya.pptx"><img src="images/SetupNewUserIDViya.png" width="500" alt="newuserviya" /></a> | <a href="ppt/Setting-Up-New-User-ViyaWorkbench.pptx"><img src="images/SetupNewUserIDViyaWorkbench.png" width="500" alt="newuserviyaworkbench" /></a> |
+The instructions below cover both SAS Viya and SAS Viya Workbench.
 
-## Setting Up a New Project
+---
 
-If you are ready to get started with a blank project, let's go! The below powerpoint will walk you through the process of creating a blank project or importing one of our training or example projects (described below).
+<a id="set-up-a-new-automl-for-iot-user"></a>
 
-Step-by-Step Guide for Viya        |Step-by-Step Guide for Viya Workbench        |
-:-------------------------:|:-------------------------:|
-<a href="ppt/Setting-Up-New-Project-Viya.pptx"><img src="images/SetupNewProjectViya.png" width="500" alt="newprojectviya" /></a> | <a href="ppt/Setting-Up-New-Project-ViyaWorkbench.pptx"><img src="images/SetupNewProjectViyaWorkbench.png" width="500" alt="newprojectviyaworkbench" /></a> |
+## Set Up a New AutoML for IoT User
 
-## Training Projects
+AutoML for IoT requires you to assign yourself a user ID. Complete this step once for each AutoML for IoT user.
 
-If you are new to SAS AutoML for IoT, you may want to begin by testing out the five training projects we've created in the next section. 
+### SAS Viya
 
-We have developed five training projects that will introduce you to the commonly used features of SAS AutoML for IoT. These projects are designed to be explored in order (from 1 to 5), and each project adds new features. Click on one of the powerpoints below to learn how to set up that training project.
+Open:
 
-### training1 
+```text
+/AutoMLforIoT/Deployments/_setup/Setup_NewUser.sas
+```
 
-**Key Concepts**
-* Creates one output table for a single asset type that contains only information from that one asset type.
+Edit the `newUserID` value.
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/TrainingProject1.pptx"><img src="images/training1.png" width="500" alt="training1" /></a> |
+Use a short identifier containing only letters - typically 5–10 characters.
 
-### training2 
+For example:
 
-**Key Concepts**
-* Introduces the concept of a hierarchy which connects assets together.
-* Creates output tables for *each* asset type - and each table contains information from potentially multiple connected assets.
+```text
+newUserID = myuser
+```
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/TrainingProject2.pptx"><img src="images/training2.png" width="500" alt="training2" /></a> |
+Run `Setup_NewUser.sas`.
 
-### training3 
+![Set up a new AutoML for IoT user in SAS Viya](images/setup-user-viya-step2-1.png)
 
-**Key Concepts**
-* Adds data enrichment and defines new derived attributes that look back in time (lag), aggregate information across connected assets (relationalAgg) and execute code (code).
+### SAS Viya Workbench
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/TrainingProject3.pptx"><img src="images/training3.png" width="500" alt="training3" /></a> |
+Open:
 
-### training4 
+```text
+/AutoMLforIoT/Deployments/_setup/Setup_NewUser.py
+```
 
-**Key Concepts**
-* Adds analytical models to predict an outcome (in this example, energy generation for a solar farm). Three different approaches to training the models are shown - one model is trained for the solarFarm, distinct models are trained for *each* inverter, and a third set of models are trained for groups of solar panel strings (grouped by their capacity).
+Edit the `newUserID` value.
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/TrainingProject4.pptx"><img src="images/training4.png" width="500" alt="training4" /></a> |
+Use a short identifier containing only letters - typically 5–10 characters.
 
-### training5 
+For example:
 
-**Key Concepts**
-* Adds customizations - in this case, business rules are added which compute an efficiency measure for each of the 3 asset type models - this compares actual power generation to the predicted values coming from the models.
+```text
+newUserID = myuser
+```
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/TrainingProject5.pptx"><img src="images/training5.png" width="500" alt="training5" /></a> |
+Run `Setup_NewUser.py`.
 
-## Example Projects
+![Set up a new AutoML for IoT user in SAS Viya Workbench](images/setup-user-workbench-step2-1.png)
 
-And... if you would like to explore some fully operational projects in detail, we've included several examples that cover a variety of use cases. Each of these use publicly available data and can be imported and worked through step by step to understand the full capabilities of the solution.
+---
 
-### Solar Power Generation
+<a id="create-a-new-project"></a>
 
-This project queries information about a solar farm from a ClearBlade instance (an accelerated integration). Energy generation at the solar panel string level is aggregated up to other levels of the solar farm and ML models are deployed to model power generation at each level of the solar farm. Since the ClearBlade instance is internal to SAS, users will only be able to run through the historical replay of this example and will not set the project live.
+## Create a New Project
 
-Thumbnail 1        | Thumbnail 2        | Thumbnail 3 | Thumbnail 4 | Thumbnail 5 |
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
-<img src="images/solarPowerGen1.png" width="500" alt="Overall Efficiency" /></a> | <img src="images/solarPowerGen2.png" width="500" alt="Efficiency Trends" /></a> | <img src="images/solarPowerGen3.png" width="500" alt="Relative Performance" /></a> | <img src="images/solarPowerGen4.png" width="500" alt="Model Detail" /></a> | <img src="images/solarPowerGen5.png" width="500" alt="Actual vs. Expected" /></a> |
- 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/SolarPowerGenProject.pptx"><img src="images/solarpowergen.png" width="500" alt="solarpowergen" /></a> |
+Use this path when you want to begin with a blank AutoML for IoT project.
 
+### SAS Viya
 
-### NYC Subway Train Monitoring 
+Open:
 
-This project queries information from publicly available APIs to gather information as to where each train is currently located. A digital twin of the entire subway system is maintained. Every minute, calculations are made to determine travel times between stations, wait times at each platform, and expected completion of the train's route given current conditions.
- 
-Thumbnail 1        | Thumbnail 2        | Thumbnail 3 | 
-:-------------------------:|:-------------------------:|:-------------------------:|
-<img src="images/subway1.png" width="500" alt="Main Dashboard" /></a> | <img src="images/subway2.png" width="500" alt="Train Level Detail Info" /></a> | <img src="images/subway3.png" width="500" alt="Delayed Trains" /></a> | 
+```text
+/AutoMLforIoT/Deployments/_setup/Setup_NewProject.sas
+```
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/NYCSubwayProject.pptx"><img src="images/nycsubway.png" width="500" alt="nycsubway" /></a> |
+Enter the desired project name in `newProjectName`, then run the program.
 
+The new project is created under:
 
-### Flood Prediction (North Carolina)
+```text
+/AutoMLforIoT/Deployments
+```
 
-This project queries information from the USGS regarding river gauge heights and from a weather API to gather rain amounts and forecasts. Changes in gauge heights upstream and information about rainfall amounts are used to predict future gauge height levels up to 6 hours into the future, with ML models deployed individually for every river segment.
- 
-Thumbnail 1        | Thumbnail 2        | Thumbnail 3 | 
-:-------------------------:|:-------------------------:|:-------------------------:|
-<img src="images/floodPred1.png" width="500" alt="Main Dashboard" /></a> | <img src="images/floodPred2.png" width="500" alt="Prediction Detail" /></a> | <img src="images/floodPred3.png" width="500" alt="Rain Actual and Forecast" /></a> | 
+The project contains the directory structure and phase programs used throughout the AutoML for IoT lifecycle.
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/FloodPredictionProject.pptx"><img src="images/floodprediction.png" width="500" alt="floodprediction" /></a> |
+![Create a new AutoML for IoT project in SAS Viya](images/setup-project-viya-step3-1.png)
 
+### SAS Viya Workbench
 
-### Patient Sepsis Monitoring
+Open:
 
-This project monitors patients in a hospital who are at risk of sepsis. Regular updates are received about vitals signs and lab tests, and a patient risk probability is updated continuously using a machine learning model as new data arrives. This capability provides the hospital with a second set of eyes watching multiple inter-related metrics to ensure patient health and well-being is proactively managed.
- 
-Thumbnail 1        | Thumbnail 2        | Thumbnail 3 | 
-:-------------------------:|:-------------------------:|:-------------------------:|
-<img src="images/patientMonitoring1.png" width="500" alt="Patient Risk" /></a> | <img src="images/patientMonitoring2.png" width="500" alt="Lab Tests" /></a> | <img src="images/patientMonitoring3.png" width="500" alt="Vital Signs" /></a> | 
+```text
+/AutoMLforIoT/Deployments/_setup/Setup_NewProject.py
+```
 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/PatientMonitoringProject.pptx"><img src="images/patientmonitoring.png" width="500" alt="patientmonitoring" /></a> |
+Enter the desired project name in `newProjectName`, then run the program.
 
+The project is created under:
 
-### Factory Production Monitoring
+```text
+/AutoMLforIoT/Deployments
+```
 
-This project monitors a digital twin of a manufacturing line that produces sprockets. A furnace melts down and combines various metals and additives, pours the result into a mold for cooling, and then finishes each sprocket to smooth out any imperfections. A QA test is performed on the product three hours later to ensure the product is ready for sale. In this example, two concurrent approaches are used to monitor production. First, each batch is tracked as it is produced - attributes about the process are stored as the product moves through the production line, and a probability is assigned using an ML model as to whether the batch is likely to meet quality standards. This provides advance notice as to whether the product is likely to fail and allows the factory to operate more proactively. In addition, a second approach is implemented which continually watches current metrics across the factory and deploys an ML model which answers the question "if you continue to run the production line with these settings, then the quality is likely to be THIS in 3-4 hours". This provides an even greater degree of visibility for the factory technicians.
+![Create a new AutoML for IoT project in SAS Viya Workbench](images/setup-project-workbench-step3-1.png)
 
-Thumbnail 1        | Thumbnail 2        | Thumbnail 3 | Thumbnail 4 |
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
-<img src="images/manufacturing1.png" width="500" alt="Continuous Quality Monitoring" /></a> | <img src="images/manufacturing2.png" width="500" alt="Continuous Quality Monitoring (with Quality Tests)" /></a> | <img src="images/manufacturing3.png" width="500" alt="BAtch-Level Detail" /></a> | <img src="images/manufacturing4.png" width="500" alt="Diagnostics" /></a> |
- 
-Step-by-Step Guide         |
-:-------------------------:|
-<a href="ppt/FactoryMonitoringProject.pptx"><img src="images/factorymonitoring.png" width="500" alt="factorymonitoring" /></a> |
+---
 
+<a id="import-an-existing-project"></a>
 
-[![Back](../images/back.png 'Back')](../installation/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../enablement-home/README.md)
+## Import an Existing Project
+
+Use this path when you already have an AutoML for IoT project export.
+
+This includes:
+
+- a project exported from another AutoML for IoT environment
+- a project created with the AutoML for IoT AI Assistant
+- one of the packaged training or example projects
+
+### Locate the Project Export
+
+Packaged examples are available under:
+
+```text
+/AutoMLforIoT/_commons/exampleProjects
+```
+
+Locate the project export you want to use and copy its file path.
+
+### SAS Viya
+
+Open:
+
+```text
+/AutoMLforIoT/Deployments/_setup/Import_Project.sas
+```
+
+Enter:
+
+- the project name you want to use
+- the path to the project export
+
+Run the program.
+
+When import completes, the project appears under:
+
+```text
+/AutoMLforIoT/Deployments
+```
+
+![Import an AutoML for IoT project in SAS Viya](images/setup-project-viya-step5-1.png)
+
+### SAS Viya Workbench
+
+Open:
+
+```text
+/AutoMLforIoT/Deployments/_setup/Import_Project.py
+```
+
+Enter:
+
+- the project name you want to use
+- the path to the project export
+
+Run the program.
+
+When import completes, the project appears under:
+
+```text
+/AutoMLforIoT/Deployments
+```
+
+![Import an AutoML for IoT project in SAS Viya Workbench](images/setup-project-workbench-step5-1.png)
+
+---
+
+## Choose What to Do Next
+
+If you want a guided introduction to the product, work through the five progressive training projects:
+
+[Explore the Training Projects](training-projects.md)
+
+If you want to see complete operational use cases, review the packaged example projects:
+
+[Explore the Example Projects](example-projects.md)
+
+If you are ready to configure your own use case, continue to the main project documentation:
+
+[Open the AutoML for IoT Project Documentation](../enablement-home/README.md)
+
+---
+
+## Previous
+
+If AutoML for IoT is not yet installed, return to [Installation](../installation/README.md).

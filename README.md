@@ -1,182 +1,112 @@
-# sas-automl-for-iot
+# SAS AutoML for IoT
 
-# Table of Contents
-1. [Overview](#overview)
-2. [How It Works](#how-it-works)
-3. [Applicable Use Cases](#applicable-use-cases)
-4. [AI Assistant](#ai-assistant)
-5. [Installation](#installation)
-6. [Contributing](#contributing)
-7. [License](#license)
+SAS AutoML for IoT is a configuration-driven framework for building and deploying real-time analytical applications with SAS.
 
-## Overview
+It combines digital-twin modeling, streaming data processing, data enrichment, automated model training and scoring, business rules, and SAS Event Stream Processing deployment into a guided workflow.
 
-Are you interested in deploying analytics in real-time?  
+Use this repository to install the solution, explore example and training projects, configure your own use case, and deploy completed projects for historical replay or real-time processing.
 
-Would you like to realize tangible value from your data in days/weeks as opposed to months/years?
+![AutoML for IoT process overview](images/phaseWorkflow.png)
 
-Do you prefer to limit cloud costs and have agile deployment options?
+## Watch the Overview
 
-Would you like an AI assistant to help guide you through the process?
+This short video provides an introduction to SAS AutoML for IoT and shows how SAS Viya Workbench and SAS Event Stream Processing can work together as part of the solution.
 
-If so, you are in the right place!
+The same overall workflow can also be used with the broader SAS Viya environment.
 
-SAS AutoML for IoT is an automated approach that dramatically simplifies solving your real-time analytics use case. It relies on just a few configuration files that a subject matter expert could provide - and then automates the entire process. From transforming simple sensor data into analytic datasets, to training models for all of your key metrics and settings, to configuring rules and alerts, to deploying your project to run in real-time 24/7, SAS AutoML for IoT does it all!
+<a href="https://youtu.be/p_AEOW2_CYA"><img src="images/IntroVideo.png" width="500" alt="Watch the SAS AutoML for IoT overview video" /></a>
 
-How is this possible?  SAS has capabilities that extend across the entire analytics lifecycle - from data ingestion and processing, to analytical modeling, to model management, to deployment. These capabilities are designed to work seemlessly together - SAS AutoML for IoT simply connects all of these capabilities elegantly and allows users to quickly tackle customer use cases.
+---
 
-Watch this short video to learn more... This video focuses on the integration of Viya Workbench and Event Stream Processing, but the same capabilities are available using the entire Viya suite (SAS Studio, Model Studio, Model Manager, Event Stream Processing, etc.).
+## Requirements
 
-<a href="https://youtu.be/p_AEOW2_CYA"><img src="images/IntroVideo.png" width="500" alt="IntroVideo" /></a> |
+AutoML for IoT requires:
 
+- **SAS Viya** or **SAS Viya Workbench**
+- **SAS Event Stream Processing**
 
-## How It Works
+When using SAS Viya, AutoML for IoT integrates capabilities in SAS Model Studio to train models, SAS Model Manager to manage models, and SAS Event Stream Processing/Manager to deploy the final project. When using the lighter weight SAS Viya Workbench, models are automatically trained in Python using popular packages such as scikit learn (packaged as pkl files) or in SAS using available procs (with scoring code or astores depending on procs used) and deployed using SAS Event Stream Processing/Manager.
 
-SAS AutoML for IoT provides a digital twin approach to address your use case. At a high level, it follows a guided workflow with the following steps...
+If you do not already have the required environment, the installation guide walks through the available setup paths and the AutoML for IoT installation process.
 
-<img src="images/processOverview.png" height="500" />
+[Install SAS AutoML for IoT](installation/README.md)
 
-<br>
+---
 
-Let's go a little deeper so you get a feeling for what is done in each of those steps... We'll look at a small example for a solar farm, where we have...
-- strings of solar panels that gather solar energy
-- combiner boxes which collect the energy generated from various solar panel strings
-- arrays - here, this is just used to an organize our assets into logical groupings
-- inverters which convert the energy from DC to AC so that energy can be used more broadly
-- solar farm which provides an overarching grouping and collects information about the solar irradiance via its devoted sensor
+## Choose How You Want to Get Started
 
-<br>
+### See How AutoML for IoT Is Used
 
-With AutoML for IoT, users create a digital twin of their use case - in other words, a picture of the assets you have, what is measured for each of those assets, and how the assets are connected... Here's an example for our solar farm...
+Explore complete example projects across energy, transportation, healthcare, manufacturing, and flood prediction.
 
-<img src="images/digitalTwin.png" height="500" />
+[Explore Example Projects](setting-up-your-first-project/example-projects.md)
 
-<br>
+### Learn with Guided Training Projects
 
-Then users enrich that digital twin with calculated measures - summarize data over time, across connected assets, run custom code, etc. These new attributes become part of the digital twin. Here's the same diagram - now with derived attributes added in blue to indicate that they are being calculated.
+Work through five progressive projects that introduce the core AutoML for IoT capabilities step by step.
 
-<img src="images/digitalTwinWithEnrichment.png" height="500" />
+[Explore Training Projects](setting-up-your-first-project/training-projects.md)
 
-SAS AutoMLfor IoT automatically maintains this picture in memory and will keep it up-to-date as data arrives in real time.
+### Build Your Own Project
 
-<br>
+Register as an AutoML for IoT user, create a blank project or import an existing one, and then work through the project documentation.
 
-Then, users simply describe what to output and model in this digital twin. No complexity... just describe...
-- what asset types you want to output tables for
-- which measures you'd like to output as columns - you can retrieve data easily from any connected asset
-- how often you'd like to output updates (for example, every minute)
-- what analytical models you would like to train - provide the target, predictors, a date range to train on, and a model pipeline to use
+[Set Up Your First Project](setting-up-your-first-project/README.md)
 
-Then, SAS AutoML for IoT does the rest!  In just a few minutes, you will have...
+### Use the AI Assistant
 
-<br>
+Use a guided conversation to learn how AutoML for IoT works, describe a new use case, or review and modify an existing project. Then import those configurations directly into AutoML for IoT and execute/deploy in SAS.
 
-**Analytic-Ready Datasets...**
+[Work with the AI Assistant](working-with-the-ai-assistant/README.md)
 
-<img src="images/outputDataset.png" /> 
+---
 
+## What AutoML for IoT Does
 
+AutoML for IoT represents an operational environment as a digital twin: the assets in the use case, the information measured for those assets, and the relationships between connected assets.
 
-<br>
+For example, a solar-power project can represent panel strings, combiner boxes, arrays, inverters, and the overall solar farm.
 
-<br>
+![Example digital twin](images/digitalTwin.png)
 
-<br>
+The digital twin can then be enriched with calculated information such as values from prior time periods, aggregations over time, values from connected assets, and custom calculations.
 
-**Trained Models via Viya's Model Studio (drag and drop)...**
+![Digital twin with derived attributes](images/digitalTwinWithEnrichment.png)
 
-<img src="images/trainModels_modelstudio.png" /> 
+From that configuration, AutoML for IoT automatically creates analytic-ready datasets for historical analysis and writes a project to continuously update those output tables to support real-time processing.
 
+![Example analytic-ready dataset](images/outputDataset.png)
 
+Projects can optionally train and deploy machine-learning models using SAS Model Studio, SAS, or Python analytical pipelines. 
 
-<br>
+![Model training with SAS Model Studio](images/trainModels_modelstudio.png)
 
-<br>
+![Model training with SAS Viya Workbench](images/trainModels_workbench.png)
 
-<br>
+The completed configuration is then automatically packaged into SAS Event Stream Processing projects which can be used for real-time deployment and/or historical replay.
 
-**OR... Trained Models via Viya Workbench (SAS or Open-Source)...**
+![Generated SAS Event Stream Processing project](images/ESPProject.png)
 
-<img src="images/trainModels_workbench.png" /> 
+---
 
+## Documentation
 
+The project documentation guides you from initial configuration through data preparation, model training, customizations, deployment, and archiving.
 
-<br> 
+[Open the AutoML for IoT Documentation](enablement-home/README.md)
 
-<br>
+Advanced topics, including defining custom analytical pipelines, are linked from the relevant sections of the documentation.
 
-<br>
+---
 
-**A Ready-to-Deploy Real-Time SAS Event Stream Processing Project (which can even be exported to a container to run anywhere)...**
+## Contributing
 
-<img src="images/ESPProject.png" /> 
+For information about contributing to this repository, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Support
 
-
-<br>
-
-<br>
-
-<br>
-
-**In Short, You Will Have Machine Learning Models Monitoring or Predicting Every Key Metric and Setting of Importance to You!!!**
-
-
-
-## Applicable Use Cases
-
-SAS AutoML for IoT has been used to...
-
-- monitor and improve the operation and efficiency of HVAC equipment - from chillers to boilers to air handlers, etc.
-- optimize manufacturing plants
-- enhance the operation of wind turbines and solar farms
-- provide continuous review of medical data, including lab tests, vital signs, etc.
-- monitor train movement, expected arrival times/delays, etc.
-- etc.
-
-And, the list is growing! Fundamentally, you can think of it this way... You need to be able to describe the assets in your use case (machines, people, locations, etc.), what you measure about those assets (temperatures, pressures, quantities, etc.), and connect the assets to reflect any dependencies that exist. Then you simply request what you want to know - what you want to predict, forecast, be notified of, etc. 
-
-SAS AutoML for IoT takes care of the rest. Your team gets to spend more time focused on the analytics and less time orchestrating every little detail.
-
-
-## AI Assistant
-
-While every step in the AutoML for IoT process is simple in nature, we've found it even more efficient to allow users to engage with an AI assistant to configure their projects using simple conversation...  
-
-<img src="images/aiAssistant.png" /> 
-
-
-More on this later!!! 
-
-<br>
-
-<br>
-
-
-## Installation
-
-It's easy to get started!  
-
-Click [here](installation/README.md) to learn how to set up everything you will need!
-
-
-### Prerequisites
-
-SAS AutoML for IoT integrates multiple products in SAS Viya, including SAS Studio, Model Studio, Model Manager, Event Stream Processing Studio, and Event Stream Manager. If you already have these in your SAS installation, great!  If not, the installation page shows you how to obtain a trial environment to try this out.
-
-
-### Getting Started / Examples
-
-Once you've installed what you need, this [page](setting-up-your-first-project/README.md) will show you how to set up your first project - and it also includes five training projects that each add a new capabiity as well as several full examples of projects that you can work through and set live.
-
-
-### Additional Resources
-
-As you work through designing and deploying your SAS AutoML for IoT project, you will find it useful to refer to resources on this [page](enablement-home/README.md). It provides supporting materials related to each step.
+For support information, see [SUPPORT.md](SUPPORT.md).
 
 ## License
 
 This project is licensed under the [SAS License Agreement for Corrective Code or Additional Functionality](LICENSE).
-
-
-![Back](images/backgray.png "Back")   [![Home](images/home.png 'Home')](enablement-home/README.md)   [![Next](images/next.png 'Next')](installation/README.md)

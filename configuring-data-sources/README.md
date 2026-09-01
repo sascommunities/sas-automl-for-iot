@@ -1,43 +1,118 @@
-# Configuring Data Sources 
+# Configuring Data Sources
 
-Please choose one of the options below...
+In this step, a user can set up connection to a historical data source, real-time feed, or to an operational ClearBlade environment. In most cases, a user will skip this step for the time being and first define the digital twin for their use case - then return here to configure connection to its historical/real-time data. However, if a user has already configured that twin in ClearBlade, then they can enter that information here to facilitate later steps.
 
-- [I already set my digital twin up in ClearBlade](#configuring-your-connection-to-clearblade) - If you've already set your digital twin up in ClearBlade, then click [here](#configuring-your-connection-to-clearblade) to configure your connection before you proceed to the next steps... Since you've already configured your digital twin, we'll use that information wherever possible! 
+Choose the option that matches your project.
 
-- [I need to set up my digital twin](../describing-your-digital-twin/README.md) - We'll have you skip this step for now and first describe your digital twin by clicking [here](../describing-your-digital-twin/README.md). Then you can return to this step later on to set up [connections](#setting-up-real-time-and-historical-data-connections) to retrieve real-time and/or historical data about your digital twin.
-
-
-## Setting Up Real-Time and Historical Data Connections 
-
-Now that your digital twin has been configured, we need to retrieve historical data related to your assets/attributes  **and/or**  get connected to real-time updates.
-
-It is easy to configure connections to both real-time data sources and to historical databases. Details about each of these options are provided in the sections below. If you are creating a demo project only and do not require either of these direct connections, then you may skip this step and manually create your historical dataset when you get to the 'retrieveHistoricalData' step in the process.
-
-### Configuring a Connection to a Real-Time Data Source
-
-The below powerpoint will walk you through how to create a real-time connection to your data source. SAS Event Stream Processing has more than 20 existing [connectors](https://go.documentation.sas.com/doc/en/espcdc/v_070/espca/titlepage.htm) that can be used to retrieve real-time data. This includes connecting to message feeds (kafka, mqtt, etc), querying databases at a specified time interval, running API calls, etc. The powerpoint will show you how to set up these connections and then how to integrate that information into your SAS AutoML for IoT project. 
-
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/dataSources-customESP.pptx"><img src="images/customESP.png" width="500" alt="customESP" /></a> |
+- **I need to set up my digital twin.** First define the asset types, attributes, assets, metadata, and relationships that [describe your digital twin](../describing-your-digital-twin/README.md). After the digital twin has been defined, return here to configure real-time and/or historical data connections for it.
 
 
-### Configuring a Connection to a Historical Database
+- **I already set my digital twin up in ClearBlade.** [Configure the connection to your existing ClearBlade data source](clearblade.md). AutoML for IoT will use this information to query your existing ClearBlade environment and retrieve details about the digital twin, historical data for model training, and real-time updates. 
 
-The below powerpoint will walk you through how to configure a connection to a historical sensor database that holds historical sensor readings for the assets/attributes in your digital twin. If you have this configured, then whenever historical data is needed (for example, replaying a historical time period), data will be retrieved automatically from this source.
+---
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/dataSources-historicalDB.pptx"><img src="images/historicalDB.png" width="500" alt="historicalDB" /></a> |
+## Where the Configuration Goes
 
+Data sources are configured under:
 
-## Configuring Your Connection to ClearBlade
+```text
+Phase-1---Project-Definition/
+└── 01_defineDataSources/
+    ├── _options/
+    │   ├── clearblade-example/
+    │   ├── customESP-example/
+    │   └── historicalDB-example/
+    ├── <your configured data-source folders>/
+    └── processDataSources.sas
+```
 
-The below powerpoint will walk you through how to create a connection to an existing ClearBlade instance. This will allow you to automatically retrieve the information about your digital twin, retrieve any needed historical data for model training, and ultimately connect to a real-time stream of data.
+The `_options` directory contains **templates**. Do not edit those template folders in place.
 
-Step-by-Step Guide         |  
-:-------------------------:|
-<a href="ppt/dataSources-clearblade.pptx"><img src="images/clearblade.png" width="500" alt="clearblade" /></a> |
+For each data source that your project needs:
 
+1. Open `01_defineDataSources/_options`.
+2. Copy the appropriate template folder into `01_defineDataSources`.
+3. Rename the copied folder so it identifies that specific connection.
+4. Edit the configuration files inside the copied folder.
+5. Repeat the process if the project uses more than one data source.
+6. Run `processDataSources.sas` after the configured source folders are ready.
 
-[![Back](../images/back.png 'Back')](../specifying-project-information/README.md)   [![Home](../images/home.png 'Home')](../enablement-home/README.md)   [![Next](../images/next.png 'Next')](../describing-your-digital-twin/README.md)
+For example, a configured project might contain:
+
+```text
+01_defineDataSources/
+├── _options/
+├── customESP-readSemtech/
+├── historicalDB-buildingHistory/
+└── processDataSources.sas
+```
+
+Only the copied and configured folders under `01_defineDataSources` become project data sources. The folders inside `_options` remain available as starting templates.
+
+## Setting Up Real-Time and Historical Data Connections
+
+After the digital twin has been configured, AutoML for IoT can retrieve historical information about the assets and attributes, connect to real-time updates, or do both.
+
+If you are creating a demonstration project and do not require direct data connections, you can skip this step and manually create historical data later in the process.
+
+Choose one or more of the following connection types.
+
+### Real-Time Data Source
+
+Use SAS Event Stream Processing to connect to a real-time source and transform incoming events into the standard schema expected by AutoML for IoT.
+
+SAS Event Stream Processing supports many connection patterns, including message feeds such as Kafka and MQTT, database queries, and API-based integrations.
+
+For details about configuring connection to a real-time data source, see [Configure a Custom ESP Real-Time Data Source](custom-esp.md).
+
+### Historical Database
+
+Configure a database connection when historical sensor readings are stored in a database.
+
+After this connection is configured, later steps that need historical data can retrieve it from the database automatically.
+
+For details about configuring a historical-database source, see [Configure a Historical Database](historical-database.md).
+
+### ClearBlade
+
+If your digital twin already exists in ClearBlade, configure the native ClearBlade integration.
+
+This connection can be used to:
+
+- retrieve information about assets, attributes, and hierarchies
+- retrieve historical data for model training
+- connect to real-time updates
+
+For details about configuring a ClearBlade data source, see [Configure a ClearBlade Data Source](clearblade.md).
+
+## Using Multiple Data Sources
+
+A project can contain more than one configured source.
+
+Create one copied-and-renamed folder for each connection. For example:
+
+```text
+01_defineDataSources/
+├── clearblade-production/
+├── historicalDB-archive/
+├── customESP-weather/
+└── processDataSources.sas
+```
+
+Each folder is configured independently. After all required source folders are ready, run `processDataSources.sas` so AutoML for IoT can process the complete set of configured data sources.
+
+![ClearBlade processing log](images/clearblade-process-log.png)
+
+Note that future steps will make use of the configured data sources as needed. Any historical data sources will automatically be used when history data retrieval is performed, and the final real-time project will automatically integrate the content needed to connect via custom ESP connection or ClearBlade.
+
+## Previous
+
+To review the project name and timing settings that should be defined before data connections are configured, see [Specifying Project Information](../specifying-project-information/README.md).
+
+## Next
+
+After the required data-source decisions are understood, define the structure of the digital twin that the incoming data will update. For details about asset types, attributes, assets, metadata, and hierarchies, see [Describing Your Digital Twin](../describing-your-digital-twin/README.md).
+
+## Related Information
+
+For the overall AutoML for IoT workflow and links to the remaining project phases, see [Enablement Home](../enablement-home/README.md).
